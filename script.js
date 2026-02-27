@@ -8,13 +8,11 @@ function w()
 {
 	//return screen.availWidth
 	return screen.availHeight
-	//return 800
 }
 
 function h()
 {
 	return screen.availHeight
-	//return 800
 }
 
 const back = "#191D32"
@@ -74,6 +72,7 @@ function draw_line(p1, p2)
     	}
 
     	if (a.x < 0 || a.y < 0 || b.x < 0 || b.y < 0) {
+		console.log("Erreur: Tas cramptes")
     	    return; 
     	}
 

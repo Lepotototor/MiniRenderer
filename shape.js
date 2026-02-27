@@ -3137,38 +3137,64 @@ f 90/89/90 97/87/97 89/83/89
 f 90/642/90 98/56/98 92/75/92
 `)
 
+vertices = square_vertices
+faces = square_faces
+
 function get_vertices()
 {
-	if (shape_choice.value == "octa")
-		return octo_vertices;
-	else if (shape_choice.value == "pyramid")
-		return pyramid_vertices;
-	else if (shape_choice.value == "tetra")
-		return tetra_vertices;
-	else if (shape_choice.value == "prism")
-		return prism_vertices;
-	else if (shape_choice.value == "diamond")
-		return diamond_vertices;
-	else if (shape_choice.value == "pinguin")
-		return penger.v;
-	else
-		return square_vertices;
+	return vertices;
 }
 
 function get_faces()
 {
-	if (shape_choice.value == "octa")
-		return octo_faces;
-	else if (shape_choice.value == "pyramid")
-		return pyramid_faces;
-	else if (shape_choice.value == "tetra")
-		return tetra_faces;
-	else if (shape_choice.value == "prism")
-		return prism_faces;
-	else if (shape_choice.value == "diamond")
-		return diamond_faces;
-	else if (shape_choice.value == "pinguin")
-		return penger.f;
-	else
-		return square_faces;
+	return faces;
 }
+
+shape_choice.addEventListener('change', (event) => {
+	if (shape_choice.value == "octa")
+		vertices = octo_vertices;
+	else if (shape_choice.value == "pyramid")
+		vertices = pyramid_vertices;
+	else if (shape_choice.value == "tetra")
+		vertices = tetra_vertices;
+	else if (shape_choice.value == "prism")
+		vertices = prism_vertices;
+	else if (shape_choice.value == "diamond")
+		vertices = diamond_vertices;
+	else if (shape_choice.value == "pinguin")
+		vertices = penger.v;
+	else
+		vertices = square_vertices;
+
+	if (shape_choice.value == "octa")
+		faces = octo_faces;
+	else if (shape_choice.value == "pyramid")
+		faces = pyramid_faces;
+	else if (shape_choice.value == "tetra")
+		faces = tetra_faces;
+	else if (shape_choice.value == "prism")
+		faces = prism_faces;
+	else if (shape_choice.value == "diamond")
+		faces = diamond_faces;
+	else if (shape_choice.value == "pinguin")
+		faces = penger.f;
+	else
+		faces = square_faces;
+})
+
+file_upload.addEventListener('change', function(event) {
+    const file = event.target.files[0]; // On récupère le premier fichier
+
+    if (file) {
+        const reader = new FileReader(); // L'objet qui permet de lire le fichier
+
+        reader.onload = function(e) {
+            const content = e.target.result;
+            let p = parseOBJ(content)
+			vertices = p.v
+			faces = p.f
+        };
+
+        reader.readAsText(file);
+    }
+});
